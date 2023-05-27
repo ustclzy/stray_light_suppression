@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-def read_data(data_dir):
+def read_data(data_dir,plot=False):
     """Reads the peak values from each lvm file in the subdirectories of the data directory.
     For each subdirectory, calculates average peak value over all lvm files and returns a dictionary.
 
@@ -20,7 +20,8 @@ def read_data(data_dir):
                 continue
             file_path = os.path.join(data_dir, dir_name, file_name)
             try:
-                # plot_lvm(file_path,save_path=os.path.join(data_dir, dir_name, file_name.replace(".lvm", ".png")))
+                if plot:
+                    plot_lvm(file_path,save_path=os.path.join(data_dir, dir_name, file_name.replace(".lvm", ".png")))
                 # 读取file_path保存在一个list中，每行为一个元素，每个元素去除空白符号
                 with open(file_path, "r") as f:
                     lines = f.readlines()
