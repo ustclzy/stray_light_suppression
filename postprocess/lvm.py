@@ -1,10 +1,13 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-def read_data(data_dir):
+def read_data(data_dir,plot=False):
     """Reads the peak values from each lvm file in the subdirectories of the data directory.
     For each subdirectory, calculates average peak value over all lvm files and returns a dictionary.
-
+    定义一个函数 get_peak_value，用于计算给定的 lvm 文件中的峰值，峰值被定义为其中最大的计数值。
+    定义一个函数 read_data，用于读取 data 目录下的所有子文件夹，对于每个子文件夹，遍历其中的所有 lvm 文件
+    计算它们的峰值，并计算这些峰值的平均值，作为该子文件夹的平均峰值。
+    最后将计算结果存放在一个字典中，并返回该字典。
     Args:
         data_dir (str): path to the data directory
     Returns:
@@ -20,7 +23,8 @@ def read_data(data_dir):
                 continue
             file_path = os.path.join(data_dir, dir_name, file_name)
             try:
-                # plot_lvm(file_path,save_path=os.path.join(data_dir, dir_name, file_name.replace(".lvm", ".png")))
+                if plot:
+                    plot_lvm(file_path,save_path=os.path.join(data_dir, dir_name, file_name.replace(".lvm", ".png")))
                 # 读取file_path保存在一个list中，每行为一个元素，每个元素去除空白符号
                 with open(file_path, "r") as f:
                     lines = f.readlines()
